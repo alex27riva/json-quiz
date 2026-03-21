@@ -96,7 +96,7 @@ export default function Quiz() {
     <div style={{
       minHeight: "100vh", background: "#0a0a0f",
       display: "flex", alignItems: "center", justifyContent: "center",
-      fontFamily: "'Georgia', 'Times New Roman', serif",
+      fontFamily: "system-ui, 'Segoe UI', sans-serif",
       padding: "24px", position: "relative", overflow: "hidden"
     }}>
       <div style={{
@@ -116,11 +116,11 @@ export default function Quiz() {
         {/* ── UPLOAD ── */}
         {screen === "upload" && (
           <div style={{ textAlign: "center", animation: "fadeUp 0.5s ease" }}>
-            <div style={{ fontSize: 52, marginBottom: 12 }}>📋</div>
+            <div style={{ fontSize: 52, marginBottom: 24 }}>📋</div>
             <h1 style={{ color: "#fff", fontSize: "clamp(24px, 5vw, 36px)", fontWeight: 700, letterSpacing: "-1px", margin: "0 0 10px" }}>
               Quiz Loader
             </h1>
-            <p style={{ color: "#555", fontSize: 15, marginBottom: 36, fontStyle: "italic" }}>
+            <p style={{ color: "#aaa", fontSize: 15, marginBottom: 36 }}>
               Upload a JSON file to start your quiz
             </p>
 
@@ -137,10 +137,10 @@ export default function Quiz() {
               }}
             >
               <div style={{ fontSize: 40, marginBottom: 14 }}>{dragOver ? "⬇️" : "📂"}</div>
-              <p style={{ color: dragOver ? "#a07fff" : "#555", fontSize: 15, margin: 0, transition: "color 0.2s" }}>
+              <p style={{ color: dragOver ? "#a07fff" : "#aaa", fontSize: 15, margin: 0, transition: "color 0.2s" }}>
                 {dragOver ? "Drop to load quiz" : "Drag & drop your JSON file here"}
               </p>
-              <p style={{ color: "#2e2e48", fontSize: 13, margin: "10px 0 0" }}>or click to browse</p>
+              <p style={{ color: "#666", fontSize: 13, margin: "10px 0 0" }}>or click to browse</p>
             </div>
 
             <input ref={fileRef} type="file" accept=".json" style={{ display: "none" }}
@@ -159,10 +159,10 @@ export default function Quiz() {
               background: "#0e0e18", border: "1px solid #1a1a2e",
               borderRadius: 12, padding: "18px 20px", textAlign: "left", marginTop: 12
             }}>
-              <p style={{ color: "#333", fontSize: 12, textTransform: "uppercase", letterSpacing: 1, margin: "0 0 10px" }}>
+              <p style={{ color: "#888", fontSize: 12, textTransform: "uppercase", letterSpacing: 1, margin: "0 0 10px" }}>
                 Expected JSON format
               </p>
-              <pre style={{ color: "#3a3a60", fontSize: 11, margin: 0, lineHeight: 1.8, fontFamily: "monospace", overflow: "auto" }}>{`{
+              <pre style={{ color: "#8888b8", fontSize: 11, margin: 0, lineHeight: 1.8, fontFamily: "monospace", overflow: "auto" }}>{`{
   "quiz": {
     "title": "My Quiz",
     "description": "Optional subtitle",
@@ -192,7 +192,7 @@ export default function Quiz() {
               {quizData.quiz.title}
             </h1>
             {quizData.quiz.description && (
-              <p style={{ color: "#888", fontSize: 16, marginBottom: 32, fontStyle: "italic" }}>
+              <p style={{ color: "#bbb", fontSize: 16, marginBottom: 32 }}>
                 {quizData.quiz.description}
               </p>
             )}
@@ -200,12 +200,12 @@ export default function Quiz() {
               {[["📝", `${total} Questions`], ["⏱", "No Time Limit"], ["🏆", "Instant Results"]].map(([icon, label]) => (
                 <div key={label} style={{ textAlign: "center" }}>
                   <div style={{ fontSize: 24 }}>{icon}</div>
-                  <div style={{ color: "#666", fontSize: 13, marginTop: 4 }}>{label}</div>
+                  <div style={{ color: "#999", fontSize: 13, marginTop: 4 }}>{label}</div>
                 </div>
               ))}
             </div>
             <button onClick={() => setScreen("quiz")} style={btnStyle("#6c3fff", "#fff")}>Start Quiz →</button>
-            <button onClick={handleNewQuiz} style={{ ...btnStyle("transparent", "#444"), marginTop: 10, border: "1px solid #1e1e30" }}>
+            <button onClick={handleNewQuiz} style={{ ...btnStyle("transparent", "#aaa"), marginTop: 10, border: "1px solid #1e1e30" }}>
               ↩ Load Different Quiz
             </button>
           </div>
@@ -215,7 +215,7 @@ export default function Quiz() {
         {screen === "quiz" && q && (
           <div style={{ animation: "fadeUp 0.35s ease" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
-              <span style={{ color: "#555", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" }}>
+              <span style={{ color: "#aaa", fontSize: 13, letterSpacing: 2, textTransform: "uppercase" }}>
                 Question {current + 1} / {total}
               </span>
               <span style={{ background: "rgba(108,63,255,0.15)", color: "#a07fff", padding: "4px 14px", borderRadius: 20, fontSize: 13, border: "1px solid rgba(108,63,255,0.3)" }}>
@@ -238,11 +238,11 @@ export default function Quiz() {
                 if (!q.answers[key]) return null;
                 const isCorrect = key === q.correct_answer;
                 const isSelected = selected === key;
-                let bg = "#111118", border = "#1e1e30", color = "#ccc";
+                let bg = "#111118", border = "#1e1e30", color = "#ddd";
                 if (revealed) {
                   if (isCorrect) { bg = "rgba(0,229,160,0.1)"; border = "#00e5a0"; color = "#00e5a0"; }
                   else if (isSelected) { bg = "rgba(255,100,100,0.1)"; border = "#ff6464"; color = "#ff6464"; }
-                  else { color = "#444"; }
+                  else { color = "#777"; }
                 } else if (isSelected) {
                   bg = "rgba(108,63,255,0.15)"; border = "#6c3fff"; color = "#c4b5ff";
                 }
@@ -268,8 +268,8 @@ export default function Quiz() {
 
             {revealed && q.explanation && (
               <div style={{ background: "rgba(255,255,255,0.03)", border: "1px solid #222", borderRadius: 12, padding: "16px 20px", marginBottom: 20, animation: "fadeUp 0.3s ease" }}>
-                <div style={{ color: "#666", fontSize: 12, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>Explanation</div>
-                <p style={{ color: "#aaa", fontSize: 14, margin: 0, lineHeight: 1.6, fontStyle: "italic" }}>{q.explanation}</p>
+                <div style={{ color: "#999", fontSize: 12, textTransform: "uppercase", letterSpacing: 1, marginBottom: 6 }}>Explanation</div>
+                <p style={{ color: "#ccc", fontSize: 14, margin: 0, lineHeight: 1.7 }}>{q.explanation}</p>
               </div>
             )}
 
@@ -289,7 +289,7 @@ export default function Quiz() {
               <div style={{ color: "#fff", fontSize: 48, fontWeight: 700, margin: "8px 0" }}>
                 {score}<span style={{ color: "#444", fontSize: 28 }}>/{total}</span>
               </div>
-              <p style={{ color: "#555", fontSize: 14 }}>
+              <p style={{ color: "#aaa", fontSize: 14 }}>
                 {score === total ? "You answered every question correctly!" : `You got ${score} out of ${total} correct.`}
               </p>
             </div>
@@ -306,7 +306,7 @@ export default function Quiz() {
                 <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                   {incorrect.map(q => (
                     <div key={q.id} style={{ background: "#111118", border: "1px solid #1e1e30", borderRadius: 14, padding: "20px 22px" }}>
-                      <p style={{ color: "#e0e0e0", fontWeight: 600, margin: "0 0 14px", fontSize: 15, lineHeight: 1.5 }}>{q.question}</p>
+                      <p style={{ color: "#f0f0f5", fontWeight: 600, margin: "0 0 14px", fontSize: 15, lineHeight: 1.5 }}>{q.question}</p>
                       <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: q.explanation ? 14 : 0 }}>
                         <span style={{ background: "rgba(255,100,100,0.1)", border: "1px solid #ff6464", borderRadius: 8, padding: "4px 12px", fontSize: 13, color: "#ff8888" }}>
                           ✗ Your answer: {q.answers[answers[String(q.id)]]}
@@ -316,7 +316,7 @@ export default function Quiz() {
                         </span>
                       </div>
                       {q.explanation && (
-                        <p style={{ color: "#777", fontSize: 13, margin: 0, lineHeight: 1.6, fontStyle: "italic" }}>💡 {q.explanation}</p>
+                        <p style={{ color: "#bbb", fontSize: 13, margin: 0, lineHeight: 1.6 }}>💡 {q.explanation}</p>
                       )}
                     </div>
                   ))}
@@ -329,7 +329,7 @@ export default function Quiz() {
             )}
 
             <button onClick={handleRestart} style={btnStyle("#6c3fff", "#fff")}>↺ Try Again</button>
-            <button onClick={handleNewQuiz} style={{ ...btnStyle("transparent", "#444"), marginTop: 10, border: "1px solid #1e1e30" }}>
+            <button onClick={handleNewQuiz} style={{ ...btnStyle("transparent", "#aaa"), marginTop: 10, border: "1px solid #1e1e30" }}>
               📂 Load New Quiz
             </button>
           </div>
